@@ -1,0 +1,58 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Операция</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Тип операции</label>
+        <select class="form-control" [(ngModel)]="editOperation.operationType" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let option of operationTypeOptions" [value]="option.id">
+            {{option.operationType}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Дата операции</label>
+        <input type="date" class="form-control" [(ngModel)]="editOperation.operationDate" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label>Работник</label>
+        <select class="form-control" [(ngModel)]="editOperation.employee" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let option of employeeOptions" [value]="option.id">
+            {{option.firstName}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Количество</label>
+        <input class="form-control" [(ngModel)]="editOperation.amount" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label>Инструмент</label>
+        <select class="form-control" [(ngModel)]="editOperation.tool" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let option of toolOptions" [value]="option.id">
+            {{option.toolName}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Склад</label>
+        <select class="form-control" [(ngModel)]="editOperation.toolWarehouse" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let option of toolWarehouseOptions" [value]="option.id">
+            {{option.warehouseName}}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="close()">Ок</button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Закрыть</button>
+  </div>
+</div>
+

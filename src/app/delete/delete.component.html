@@ -1,0 +1,13 @@
+  <div class="modal-header">
+    <h4 class="modal-title">Подтверждение удаления</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Вы действительно хотите удалить элемент?</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close(true)">Да</button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Нет</button>
+  </div>

@@ -1,0 +1,24 @@
+<h1 style="text-align: center;">Список типов инструментов</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col" *ngFor="let el of columnList">{{el}}</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let element of elements; let i = index;">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{element.toolType}}</td>
+    <td>
+      <button type="button" class="buttonMargin btn btn-outline-success buttonUrlBasket"
+              (click)="delete(element)"></button>
+      <button type="button" class="buttonMargin btn btn-outline-success buttonUrlPencil"
+              (click)="editToolType(element)"></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-outline-primary mb-2 mr-2" style="float: right;" (click)="addToolType()">Добавить</button>

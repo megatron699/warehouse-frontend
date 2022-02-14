@@ -1,0 +1,18 @@
+.buttonMargin{
+  margin: 3px;
+}
+
+.buttonUrlBasket{
+  background: url('../../images/basket.png')
+}
+
+.buttonUrlPencil{
+  background: url('../../images/pencil.png')
+}
+
+.buttonUrlBasket, .buttonUrlPencil {
+  float: right;
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+}

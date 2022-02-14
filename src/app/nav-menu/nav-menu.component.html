@@ -1,0 +1,33 @@
+<!--suppress ALL -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!--  <img src="../../images/logo.png" style="height: 50px;width: 50px" class="d-inline-block align-top" alt=""/>-->
+  <a class="navbar-brand" href="/">Склад инструментов</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!--    <span class="navbar-toggler-icon"></span>-->
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ng-container>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="employees">Работники</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="operations">Операции</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tools">Инструменты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tool-types">Типы инструментов</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tool-warehouses">Склады инструментов</a>
+        </li>
+      </ul>
+    </ng-container>
+    <a href="/logout"><button href="/logout" mdbBtn class="btn btn-dark" size="sm" >Выход </button></a>
+  </div>
+</nav>
+

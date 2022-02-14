@@ -1,0 +1,33 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Инструмент</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Название инструмента</label>
+        <input class="form-control" [(ngModel)]="editTool.toolName" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label>Производитель</label>
+        <input class="form-control" [(ngModel)]="editTool.manufacturer" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label>Тип инструмента</label>
+        <select class="form-control" [(ngModel)]="editTool.toolType" [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let option of options" [value]="option.id">
+            {{option.toolType}}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="close()">Ок</button>
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Закрыть</button>
+  </div>
+</div>
