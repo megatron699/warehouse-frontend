@@ -4,6 +4,7 @@ import {OperationTypeService} from '../../service/operation-type.service';
 import {EntityRequest} from '../../model/EntityRequest';
 import {OperationType} from "../../model/model";
 import {ModalOperationTypeComponent} from "../../modals/modal-operation-type/modal-operation-type.component";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-operation-types',
@@ -20,7 +21,8 @@ export class OperationTypeComponent extends EntityRequest<OperationType> {
 
 
   constructor(private operationTypeService: OperationTypeService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private loginService: LoginService) {
     super(operationTypeService);
   }
 
@@ -46,4 +48,10 @@ export class OperationTypeComponent extends EntityRequest<OperationType> {
     super.delete(element, this.modalService);
   }
 
+  isAdmin() {
+    const login = this.loginService.login();
+    if (login) {
+      return  login.showAdmin;
+    }
+  }
 }

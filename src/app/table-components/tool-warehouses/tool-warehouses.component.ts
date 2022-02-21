@@ -4,6 +4,7 @@ import {ToolWarehouse} from "../../model/model";
 import {EntityRequest} from "../../model/EntityRequest";
 import {ToolWarehouseService} from "../../service/tool-warehouse.service";
 import {ModalToolWarehousesComponent} from "../../modals/modal-tool-warehouses/modal-tool-warehouses.component";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-tool-warehouses',
@@ -19,7 +20,8 @@ export class ToolWarehousesComponent extends EntityRequest<ToolWarehouse> implem
   ];
 
   constructor(private operationService: ToolWarehouseService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private loginService: LoginService) {
     super(operationService);
   }
 
@@ -47,5 +49,12 @@ export class ToolWarehousesComponent extends EntityRequest<ToolWarehouse> implem
 
   delete(element: ToolWarehouse) {
     super.delete(element, this.modalService);
+  }
+
+  isAdmin() {
+    const login = this.loginService.login();
+    if (login) {
+      return  login.showAdmin;
+    }
   }
 }

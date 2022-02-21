@@ -27,7 +27,7 @@
         </li>
       </ul>
     </ng-container>
-    <a href="/logout"><button href="/logout" mdbBtn class="btn btn-dark" size="sm" >Выход </button></a>
+    <a [hidden]="!authService.isLoggedIn()" (click)=signOut()><button href="/logout" mdbBtn class="btn btn-dark" size="sm" >Выход </button></a>
   </div>
 </nav>
 

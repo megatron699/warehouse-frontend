@@ -18,16 +18,16 @@
     <td>{{element.tool.toolName}}</td>
     <td>{{element.toolWarehouse.warehouseName}}</td>
     <td>
-      <button type="button" class="buttonMargin btn btn-outline-success buttonUrlBasket"
-              (click)="delete(element)"></button>
-      <button type="button" class="buttonMargin btn btn-outline-success buttonUrlPencil"
-              (click)="editOperation(element)"></button>
+      <button *ngIf="isAdmin()" type="button" class="buttonMargin btn btn-outline-success buttonUrl"
+              (click)="delete(element)">Удалить</button>
+      <button *ngIf="isAdmin()" type="button" class="buttonMargin btn btn-outline-success buttonUrl"
+              (click)="editOperation(element)">Изменить</button>
     </td>
   </tr>
   </tbody>
 </table>
 
-<button class="btn btn-outline-primary mb-2 mr-2" style="float: right;" (click)="addOperation()">Добавить</button>
+<button *ngIf="isAdmin()" class="btn btn-outline-primary mb-2 mr-2" style="float: right;" (click)="addOperation()">Добавить</button>
 
 
 

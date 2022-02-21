@@ -7,6 +7,7 @@ import {OperationService} from '../../service/operation.service';
 import {OperationTypeService} from '../../service/operation-type.service';
 import {Tool} from "../../model/model";
 import {ModalToolComponent} from "../../modals/modal-tool/modal-tool.component";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-tool',
@@ -26,9 +27,10 @@ export class ToolComponent extends EntityRequest<Tool> {
 
   constructor(private contractService: ToolService,
               private agentService: EmployeeService,
-              private  branchService: OperationService,
+              private branchService: OperationService,
               private tariffService: OperationTypeService,
-              private  modalService: NgbModal) {
+              private modalService: NgbModal,
+              private loginService: LoginService) {
     super(contractService);
 
   }
@@ -51,12 +53,19 @@ export class ToolComponent extends EntityRequest<Tool> {
       keyboard: false
     });
 
-    modelRef.componentInstance.editToolType = Object.assign({}, element);
+    modelRef.componentInstance.editTool = Object.assign({}, element);
 
     this.elementRequest(modelRef, element);
   }
 
   delete(element: Tool) {
     super.delete(element, this.modalService);
+  }
+
+  isAdmin() {
+    const login = this.loginService.login();
+    if (login) {
+      return login.showAdmin;
+    }
   }
 }

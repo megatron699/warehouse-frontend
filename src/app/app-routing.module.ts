@@ -17,7 +17,6 @@ const routes: Routes = [
   {path: 'tool-types', component: ToolTypesComponent, canActivate: [LoginActivate]},
   {path: 'tool-warehouses', component: ToolWarehousesComponent, canActivate: [LoginActivate]},
   {path: 'signin', component: SignInComponent},
-  // {path: 'signup', component: SignUpComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'employees'}
 ];
 

@@ -4,6 +4,7 @@ import {EntityRequest} from '../../model/EntityRequest';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Operation} from "../../model/model";
 import {ModalOperationComponent} from "../../modals/modal-operation/modal-operation.component";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-operation',
@@ -24,7 +25,8 @@ export class OperationComponent extends EntityRequest<Operation> {
   ];
 
   constructor(private operationService: OperationService,
-              private  modalService: NgbModal) {
+              private  modalService: NgbModal,
+              private loginService: LoginService) {
     super(operationService);
   }
 
@@ -54,5 +56,10 @@ export class OperationComponent extends EntityRequest<Operation> {
     super.delete(element, this.modalService);
   }
 
-
+  isAdmin() {
+    const login = this.loginService.login();
+    if (login) {
+      return  login.showAdmin;
+    }
+  }
 }

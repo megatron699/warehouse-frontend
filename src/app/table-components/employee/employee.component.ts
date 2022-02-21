@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EntityRequest} from '../../model/EntityRequest';
 import {EmployeeService} from '../../service/employee.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Employee} from "../../model/model";
 import {ModalEmployeeComponent} from "../../modals/modal-employee/modal-employee.component";
+import {LoginActivate} from "../../service/login-activate.service";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-employee',
@@ -12,7 +14,7 @@ import {ModalEmployeeComponent} from "../../modals/modal-employee/modal-employee
   providers: [EmployeeService]
 })
 
-export class EmployeeComponent extends EntityRequest<Employee> {
+export class EmployeeComponent extends EntityRequest<Employee> implements OnInit {
   columnList: Array<string> = [
     "#",
     "Фамилия",
@@ -23,7 +25,8 @@ export class EmployeeComponent extends EntityRequest<Employee> {
   ];
 
   constructor(private employeeService: EmployeeService,
-              private  modalService: NgbModal) {
+              private  modalService: NgbModal,
+              private loginService: LoginService) {
     super(employeeService);
   }
 
@@ -45,5 +48,17 @@ export class EmployeeComponent extends EntityRequest<Employee> {
     super.delete(element, this.modalService);
   }
 
+  ngOnInit() {
+    const login = this.loginService.login();
+    if (login) {
+      this.getAll();
+    }
+  }
 
+  isAdmin() {
+    const login = this.loginService.login();
+    if (login) {
+      return  login.showAdmin;
+    }
+  }
 }

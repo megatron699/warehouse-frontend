@@ -1,33 +1,70 @@
-import {Component} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {AuthService, Credentials} from "../service/auth.service";
+import {Component, Inject, OnInit} from '@angular/core';
+import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
+import {UserStorageService} from "../service/user-storage.service";
+import {throwError} from "rxjs";
+import {LoginService} from "../service/login.service";
 
 
 @Component({
   selector: 'app-signin',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
-  providers: []
+  providers: [AuthService, UserStorageService]
 })
 
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   error: boolean;
-  credentials: Credentials;
+  credentials: any = {
+    username: null,
+    password: null
+  };
+  isLoggedIn: boolean;
+  private role: string;
+  showAdmin = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, @Inject(UserStorageService) private userStorageService: UserStorageService,
+              private loginService: LoginService) {
 
   }
 
-  login() {
-    this.authService.user$.subscribe(status => {
-      if (status) {
+  ngOnInit() {
+    const login = this.loginService.login();
+    if (login) {
+      this.isLoggedIn = true;
+      this.router.navigate(['employees']);
+    }
+  }
+
+  onSubmit(): void {
+    const { username, password } = this.credentials;
+
+    this.authService.login(username, password).subscribe(
+      data => {
+        console.log(data);
+        if (!data) { return throwError("Wrong login/password")}
+        this.userStorageService.saveUser(data);
+
+        this.error = false;
+        this.isLoggedIn = true;
+        // this.authService.isLoggedIn(this.isLoggedIn);
+       // this.authService.isLogged = this.isLoggedIn;
+      //  console.log(this.authService.isLogged);
+       // this.reloadPage();
+        window.location.reload();
         this.router.navigate(['employees']);
-        return;
+      },
+      err => {
+        // this.errorMessage = err.error.message;
+        this.isLoggedIn = false;
+     //   this.authService.isLogged = this.isLoggedIn;
+        this.error = true;
       }
-      this.error = true;
-    });
-    this.authService.login(this.credentials);
+    );
+
   }
 
+  isLogged() {
+    return this.isLoggedIn;
+  }
 }

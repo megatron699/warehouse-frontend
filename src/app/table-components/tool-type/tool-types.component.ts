@@ -4,6 +4,7 @@ import {ToolType} from "../../model/model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToolTypeService} from "../../service/tool-type.service";
 import {ModalToolTypeComponent} from "../../modals/modal-tool-type/modal-tool-type.component";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-tool-types',
@@ -19,7 +20,8 @@ export class ToolTypesComponent extends EntityRequest<ToolType> {
     ];
 
   constructor(private operationService: ToolTypeService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private loginService: LoginService) {
     super(operationService);
   }
 
@@ -47,5 +49,12 @@ export class ToolTypesComponent extends EntityRequest<ToolType> {
 
   delete(element: ToolType) {
     super.delete(element, this.modalService);
+  }
+
+  isAdmin() {
+    const login = this.loginService.login();
+    if (login) {
+      return  login.showAdmin;
+    }
   }
 }
